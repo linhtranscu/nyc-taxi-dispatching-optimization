@@ -2,7 +2,8 @@
 Ride Hailing Optimization Report
 Group 6: Kai Yang, Bilwa Khaparde, Linh Tran, Sangita Poudel, Rifa Safeer Shah
 
-INTRODUCTION
+INTRODUCTION \n
+
 In the ever-evolving landscape of urban mobility, ride-hailing services such as Uber and Lyft have transformed how people travel in metropolitan cities like New York City. Behind the scenes of these services lies a complex dispatching challenge: How do we assign the most suitable cab to each passenger request in real time, factoring in constraints such as traffic, legal zones, driver capacity, and operational costs?
 This project explores that challenge using a real-world NYC taxi dataset and formulates a Gurobi-based optimization model that emulates intelligent dispatch decisions under regulatory and operational constraints.
 PROBLEM & OBJECTIVES
