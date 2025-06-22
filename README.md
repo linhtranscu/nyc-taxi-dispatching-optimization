@@ -2,11 +2,11 @@
 Ride Hailing Optimization Report
 Group 6: Kai Yang, Bilwa Khaparde, Linh Tran, Sangita Poudel, Rifa Safeer Shah
 
-INTRODUCTION 
+# INTRODUCTION 
 
 In the ever-evolving landscape of urban mobility, ride-hailing services such as Uber and Lyft have transformed how people travel in metropolitan cities like New York City. Behind the scenes of these services lies a complex dispatching challenge: How do we assign the most suitable cab to each passenger request in real time, factoring in constraints such as traffic, legal zones, driver capacity, and operational costs?
 This project explores that challenge using a real-world NYC taxi dataset and formulates a Gurobi-based optimization model that emulates intelligent dispatch decisions under regulatory and operational constraints.
-PROBLEM & OBJECTIVES
+# PROBLEM & OBJECTIVES
 The rise of ride-hailing platforms like Uber and Lyft has intensified the need for efficient and fair taxi dispatch systems, especially in large metropolitan areas like New York City. The New York City Taxi and Limousine Commission (TLC) collects and provides rich datasets of all yellow and green taxi trips across the five boroughs, including time, location, fare, and cab attributes.
 
 This project focuses on optimizing real-time dispatching of cabs to passenger requests using historical NYC Yellow and Green Taxi trip data. The challenge is not merely to assign the nearest available cab to each passenger, but to do so in a way that:
@@ -46,19 +46,19 @@ Profit = fare -  pickup_cost - riding_cost (estimated from distance of route ret
 Fare = fare amount from demand data 
 Pickup cost = fuel cost to drive cab from its current location to the guest's pickup location
 Ride cost = fuel cost to drive from the pickup location to the drop-off location)
-Data Preparation
+## Data Preparation
 Libraries used
 Pandas, NumPy: Data cleaning and manipulation
 Google Maps: Real-world travel time and route distance estimation
 Folium: Interactive mapping and assignment visualization
 Gurobipy: Mathematical modeling and optimization using Gurobi
 # MODEL FORMULATION
-i. Sets:
+### i. Sets:
 C: Set of all available cab drivers
 G: Set of all available guest (rider) requests 
 A⊆C×G:: Valid cab-guest assignment after capacity constraint and zone restrictions
 
-ii.Parameters: 
+### ii.Parameters: 
 ETAcg​: Estimated time taken for cab  c∈C to reach guest g∈G.
             Profitcg: Net profit for assigning cab 
            Pg: Number of passengers in guest g’s request
@@ -66,11 +66,11 @@ ETAcg​: Estimated time taken for cab  c∈C to reach guest g∈G.
            MPGc : Miles per gallon of cab c 
            Fuel Price: Assumed cost per gallon of  fuel
 
-Decision Variables
+### Decision Variables
 Xcg= 1 (if cab is assigned to guest g
 Xcg= 0 otherwise 
 
-iii.Objective Functions
+### iii.Objective Functions
 Maximize Total Profit
 Max ∑  Profit cg​⋅Xcg​
 Minimize Wait Times
@@ -125,7 +125,7 @@ Guest179 requirement
 
 While Cab14 had both a shorter ETA and a higher profit, it failed the capacity constraint , it could only hold 4 passengers, while Guest179 required seating for 5. This constraint rendered the assignment infeasible.
 Gurobi’s model correctly rejected Cab14 and selected Cab132, which fully satisfied all feasibility rules. This example highlights the strength of the optimization logic: it doesn’t just pick the nearest or most profitable option, but evaluates all constraints holistically to make a valid and optimal decision.
-Key Insight
+## Key Insight
 This case study reinforces that our model replicates how intelligent dispatch systems must operate in the real world ,making assignment decisions based not only on profit or proximity but on complete feasibility. Such behavior is critical for building trustworthy systems that perform under real operational rules.
 How is Our Model Relevant and solves real world Problems
 Real-World Travel Time
@@ -150,7 +150,7 @@ Logistics & Delivery (e.g., Amazon, FedEx): Assigning drivers to delivery routes
 Emergency Response (e.g., ambulances, fire units): Matching emergency vehicles to calls with minimal response time.
 Field Services (e.g., utility repairs): Scheduling technicians to service requests by location and skill.
 Event Staffing: Assigning staff or volunteers to roles based on availability and proximity.
-Learnings
+### Learnings
 How to translate real-world dispatch logic into LP constraints
 Use of multi-objective optimization and Gurobi’s priority system
 API integration (Google Maps) for dynamic traffic-aware decision-making
